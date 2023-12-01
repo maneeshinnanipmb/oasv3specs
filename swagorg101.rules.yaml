@@ -1,17 +1,6 @@
 documentationUrl: >-
   https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html
 rules:
-  camelcasename_tek1:
-    description: ""
-    message: case must be camelcase
-    formats:
-      - oas3_0
-    severity: error
-    given: $.name
-    then:
-      function: casing
-      functionOptions:
-        type: camel
   adidas-path-parameters-camelCase-alphanumeric:
     description: Path parameters MUST follow camelCase
     message: '"{{property}} path parameter is not camelCase: {{error}}"'
@@ -23,10 +12,14 @@ rules:
       function: pattern
       functionOptions:
         match: '"^[a-z][a-zA-Z0-9]+$"'
-  path-no-trailing-slash:
-    description: Paths should not end with `#/`.
-    given: $.paths[*]~
+  camelcasename_tek1:
+    description: ''
+    message: case must be camelcase
+    formats:
+      - oas3_0
+    severity: error
+    given: $.name
     then:
-      function: pattern
+      function: casing
       functionOptions:
-        notMatch: .+/$
+        type: camel
