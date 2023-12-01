@@ -1,4 +1,5 @@
-documentationUrl: https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html
+documentationUrl: >-
+  https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html
 rules:
   camelcasename_tek1:
     description: ""
