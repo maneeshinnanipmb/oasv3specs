@@ -23,3 +23,14 @@ rules:
       function: casing
       functionOptions:
         type: camel
+  adidas-path-parameters-camelCase-alphanumeric-1:
+    description: Path parameters MUST follow camelCase
+    message: '"{{property}} path parameter is not camelCase: {{error}}"'
+    formats:
+      - oas3_0
+    severity: warn
+    given: $..parameters[?(@.in == 'path')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '"^[a-z][a-zA-Z0-9]+$"'
