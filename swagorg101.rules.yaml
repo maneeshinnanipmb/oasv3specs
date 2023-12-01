@@ -55,7 +55,7 @@ rules:
       function: pattern
       functionOptions:
         match: "^\/([a-z0-9]+(-[a-z0-9]+)*)?(\/[a-z0-9]+(-[a-z0-9]+)*|\/{.+})*$" # doesn't allow /asasd{asdas}sadas pattern or not closed braces
- bian_no_http_basic:
+  bian_no_http_basic:
     description: Consider a more secure alternative to HTTP Basic.
     message: >-
       HTTP Basic is a pretty insecure way to pass credentials around, please
