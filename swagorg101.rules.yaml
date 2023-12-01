@@ -25,7 +25,7 @@ rules:
   path-no-trailing-slash:
     description: Paths should not end with `#/`.
     given: $.paths[*]~
-    then: null
-    function: pattern
-    functionOptions:
-      notMatch: .+/$
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: .+/$
