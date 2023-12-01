@@ -23,3 +23,10 @@ rules:
       function: pattern
       functionOptions:
         match: '"^[a-z][a-zA-Z0-9]+$"'
+path-no-trailing-slash:
+  description: Paths should not end with `#/`.
+  given: "$.paths[*]~"
+  then:
+    function: pattern
+    functionOptions:
+      notMatch: ".+\/$"
