@@ -1,0 +1,65 @@
+documentationUrl: https://support.smartbear.com/swaggerhub/docs/organizations/api-standardization.html
+rules:
+  bian_path_must_contain_servicedomain-api:
+    description: BIAN Rule - path must contain servicedomain
+    message: Path does not have valid servicedomain
+    formats:
+      - oas2
+      - oas3_0
+      - oas3_1
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: ^\/(SavingsAccount|CardCollections|CurrentAccount|CustomerBilling|PaymentExecution|PaymentInstruction|PaymentOrder|CreditCard|CreditCardPositionKeeping|LegalEntityDirectory|DocumentLibrary|CollateralAssetAdministration|CollateralAllocationManagement|VirtualAccount|CreditManagement|DirectDebitMandate|PaymentInitiation|CounterpartyAdministration|ConsumerLoan|Loan|CorporateLoan|)\/
+  bian-every-api-has-approval-group-defined:
+    description: BIAN Rule - every api has approval group
+    message: Api should have approval group defined as {{property}}
+    formats:
+      - oas3_0
+    severity: error
+    given: $.info
+    then:
+      function: truthy
+      field: x-bdo-approval-groups
+  bian-approval-has-api-approval-status-defined:
+    description: BIAN Rule - API should have approval status defined
+    message: Api should have approval status defined in {{property}}
+    formats:
+      - oas2
+      - oas3_0
+      - oas3_1
+    severity: error
+    given: $.info.x-bdo-approval-groups
+    then:
+      function: truthy
+      field: x-approved-status
+  bian-publish-api-only-if-approved:
+    description: BIAN Rule - API must be approved
+    message: Api must be approved
+    formats:
+      - oas2
+      - oas3_0
+      - oas3_1
+    severity: error
+    given: $.info.x-bdo-approval-groups.x-approved-status
+    then:
+      function: enumeration
+      field: ''
+      functionOptions:
+        values:
+          - APPROVED
+          - approved
+          - REVIEWED
+  bian-path-should-end-with-action-term:
+    description: BIAN Rule - Bian api path ends with action term
+    message: BIAN api path should end with BIAN recognised action term verb
+    formats:
+      - oas3_0
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: ^.*/(Activate|Configure|Feedback|Initiate|Create|Register|Evaluate|Provide|Update|Control|Exchange|Capture|Execute|Request|Grant|Retrieve|Notify)$
